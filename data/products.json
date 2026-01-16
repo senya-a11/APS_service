@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Аккумулятор Premium 36V 15Ah",
+    "category": "batteries",
+    "price": 16500,
+    "description": "Высокоёмкий литий-ионный аккумулятор с системой защиты BMS",
+    "image_url": "/static/images/battery.jpg",
+    "stock": 8,
+    "featured": true
+  },
+  {
+    "id": 2,
+    "name": "Мотор-колесо Ultra 500W",
+    "category": "motors",
+    "price": 12500,
+    "description": "Бесщёточный мотор с прямым приводом",
+    "image_url": "/static/images/motor.jpg",
+    "stock": 5,
+    "featured": true
+  },
+  {
+    "id": 3,
+    "name": "Контроллер Smart 36V",
+    "category": "electronics",
+    "price": 4900,
+    "description": "Интеллектуальный контроллер с Bluetooth",
+    "image_url": "/static/images/controller.jpg",
+    "stock": 15,
+    "featured": false
+  },
+  {
+    "id": 4,
+    "name": "Дисплей Color LCD",
+    "category": "electronics",
+    "price": 3200,
+    "description": "Цветной LCD дисплей с подсветкой",
+    "image_url": "/static/images/display.jpg",
+    "stock": 12,
+    "featured": true
+  },
+  {
+    "id": 5,
+    "name": "Тормозные диски Premium",
+    "category": "brakes",
+    "price": 2200,
+    "description": "Вентилируемые тормозные диски",
+    "image_url": "/static/images/brakes.jpg",
+    "stock": 25,
+    "featured": false
+  }
+]

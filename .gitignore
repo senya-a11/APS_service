@@ -1,0 +1,57 @@
+# Python
+
+**pycache**/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Система
+
+.DS_Store
+Thumbs.db
+
+# Загруженные файлы
+
+static/uploads/*
+!static/uploads/.gitkeep
+
+# Логи
+
+*.log
+
+# База данных (если будет использоваться SQLite)
+
+*.db
+*.sqlite
+
+# Environment
+
+.env
+.env.local

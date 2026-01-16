@@ -1,0 +1,42 @@
+{
+  "57706729-4d02-4786-9842-2764882eb06c": {
+    "id": "57706729-4d02-4786-9842-2764882eb06c",
+    "username": "demo",
+    "email": "demo@scooterparts.ru",
+    "full_name": "Демо Пользователь",
+    "phone": "+79991234567",
+    "password_hash": "pbkdf2_sha256:100000:e0be44cda4becec9e1d9b2e1cef2e7e9:aad11358d37886a43da7e92ae22fc3a16680d183f76883a0b347fa8ef52cdaf6",
+    "created_at": "2026-01-16T21:10:15.299788",
+    "is_admin": true
+  },
+  "2b5d8827-3027-4de1-9527-a55ddc94beff": {
+    "id": "2b5d8827-3027-4de1-9527-a55ddc94beff",
+    "username": "12345678",
+    "email": "arshuklin@gmail.com",
+    "full_name": "Senya Github",
+    "phone": "",
+    "password_hash": "pbkdf2_sha256:100000:0f53e2714f099e284b8417154d666fd1:f945188f3772a249a0b56bd66f326bf15622dff7ef6035ff166c05243c22ebca",
+    "created_at": "2026-01-16T21:12:07.395438",
+    "is_admin": false
+  },
+  "6f6d1002-990a-46fb-a269-30e2d26e9e79": {
+    "id": "6f6d1002-990a-46fb-a269-30e2d26e9e79",
+    "username": "123456782",
+    "email": "arshukln@gmail.com",
+    "full_name": "Senya Githubй",
+    "phone": "",
+    "password_hash": "pbkdf2_sha256:100000:ec824132db0cd94b806a790349b1f142:28a0a20e3223e0237208a02444d608df0bbd9652af198aaabb87d0084acff847",
+    "created_at": "2026-01-16T22:02:48.010114",
+    "is_admin": false
+  },
+  "545808eb-8ef5-42f5-8865-dacd80047f63": {
+    "id": "545808eb-8ef5-42f5-8865-dacd80047f63",
+    "username": "123456",
+    "email": "12345@g.r",
+    "full_name": "123456",
+    "phone": "",
+    "password_hash": "pbkdf2_sha256:100000:3eefa1c011e65718f9597d1ad5e61bb9:86748cf6fecc7827ca86338caeee7bb79c99b05ffb8e353b392315d6b81e7822",
+    "created_at": "2026-01-16T22:16:04.554554",
+    "is_admin": false
+  }
+}
