@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: scooter-parts-shop
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 4 --worker-class uvicorn.workers.UvicornWorker main:app
+    envVars:
+      - key: ADMIN_PASSWORD
+        generateValue: true
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: scooter-shop-db
+          property: connectionString
+    healthCheckPath: /api/test-auth
+    autoDeploy: true
+
+databases:
+  - name: scooter-shop-db
+    databaseName: scooter_shop
+    user: scooter_user
+    plan: free
