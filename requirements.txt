@@ -1,32 +1,33 @@
-# FastAPI и зависимости
+# Core
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 gunicorn==21.2.0
 
-# PostgreSQL драйвер
+# Database
 asyncpg==0.29.0
 
-# JWT аутентификация
+# Authentication & Security
 python-jose[cryptography]==3.3.0
-passlib==1.7.4
+passlib[bcrypt]==1.7.4
 python-multipart==0.0.6
+cryptography==41.0.7
 
-# Работа с изображениями
+# File handling
+aiofiles==23.2.1
 Pillow==10.1.0
 
-# Переменные окружения
+# Environment & Config
 python-dotenv==1.0.0
-
-# Валидация данных
 pydantic==2.5.0
 pydantic-settings==2.1.0
 
-# CORS
-fastapi-cors==0.1.0
-
-# Шаблоны
+# Templates
 Jinja2==3.1.2
 
-# Дополнительные утилиты
-aiofiles==23.2.1
+# HTTP client (для health check)
 httpx==0.25.1
+
+# Development (optional)
+black==23.11.0
+pytest==7.4.3
+pytest-asyncio==0.21.1

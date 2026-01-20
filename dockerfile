@@ -1,9 +1,12 @@
 # Dockerfile для деплоя Scooter Parts Shop на Render
+# Используем многоступенчатую сборку для оптимизации размера
 
-# Используем официальный образ Python с slim-версией для уменьшения размера
+# ============================================
+# Этап сборки
+# ============================================
 FROM python:3.11-slim as builder
 
-# Устанавливаем системные зависимости
+# Устанавливаем системные зависимости для сборки
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
@@ -11,16 +14,17 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы зависимостей
+# Копируем зависимости
 COPY requirements.txt .
 
-# Создаем виртуальное окружение и устанавливаем зависимости
+# Создаем виртуальное окружение
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-RUN pip install --no-cache-dir --upgrade pip && \
+
+# Устанавливаем зависимости
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip install --no-cache-dir -r requirements.txt
 
 # ============================================
@@ -32,16 +36,18 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     curl \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Создаем пользователя для безопасности
-RUN useradd -m -u 1000 appuser && \
-    mkdir -p /app/static /app/templates /app/data && \
+RUN adduser --disabled-password --gecos "" appuser && \
+    mkdir -p /app && \
     chown -R appuser:appuser /app
 
 # Копируем виртуальное окружение из builder
 COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
+ENV PYTHONPATH=/app
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -50,23 +56,18 @@ WORKDIR /app
 COPY --chown=appuser:appuser . .
 
 # Создаем необходимые директории
-RUN mkdir -p /app/static/images /app/static/uploads /app/static/favicon /app/data /app/templates && \
-    chown -R appuser:appuser /app/static /app/data /app/templates
+RUN mkdir -p /app/static/images /app/static/uploads /app/static/favicon && \
+    chown -R appuser:appuser /app/static
 
 # Переключаемся на непривилегированного пользователя
 USER appuser
 
-# Создаем .env файл с дефолтными значениями для Render
-RUN echo "ADMIN_PASSWORD=admin123" > .env && \
-    echo "SECRET_KEY=$(python -c 'import secrets; print(secrets.token_urlsafe(32))')" >> .env && \
-    echo "DATABASE_URL=postgresql://user:password@localhost/scooter_shop" >> .env
-
 # Экспортируем порт
 EXPOSE 8000
 
-# Здоровьечек для Render
+# Health check для Render
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/api/test-auth || exit 1
 
-# Команда запуска с gunicorn для production
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "main:app"]
+# Команда запуска
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "2", "--worker-class", "uvicorn.workers.UvicornWorker", "--timeout", "120", "main:app"]
